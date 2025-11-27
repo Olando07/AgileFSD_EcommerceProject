@@ -7,28 +7,31 @@ Rails.application.routes.draw do
   # Can be used by load balancers and uptime monitors to verify that the app is live.
   get "up" => "rails/health#show", as: :rails_health_check
   
-  get "home/index"
-  get "admin/index"
+  root "home/index"
 
-  get "orders/new"
-  get "orders/create"
-  get "orders/show"
-  get "orders/index"
+  # Create new Order, show order, show order, show index with order history
+  get '/checkout', to: 'orders#new'
+  resources :orders, only: [:create, :show, :index]
 
-  get "cart/index"
-  get "cart/add"
-  get "cart/remove"
-  get "cart/update"
+  # Show Cart with add, update, delete and clear  
+  resource :cart, only: [:show] do
+    post 'add/:product_id', to: 'carts#add'
+    patch 'update/:product_id', to: 'carts#update'
+    delete 'remove/:product_id', to: 'carts#remove'
+    delete 'clear', to: 'carts#clear'
+  end
 
-  get "products/index"
-  get "products/show"
+  # Signup and create user
+  get '/signup', to: 'users#new'
+  resources :users, only: [:create]
 
-  get "users/new"
-  get "users/create"
+  # Index and show page for products
+  resources :products, only: [:index, :show]
 
-  get "sessions/new"
-  get "sessions/create"
-  get "sessions/destroy"
+  # Sessions for login/logout
+  get '/login', to: 'sessions#new'
+  post '/login', to: 'sessions#create'
+  delete '/logout', to: 'sessions#destroy'
   
 
   # Render dynamic PWA files from app/views/pwa/* (remember to link manifest in application.html.erb)

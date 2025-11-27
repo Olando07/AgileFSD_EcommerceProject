@@ -1,0 +1,82 @@
+<% if flash[:notice] || flash[:alert] || flash[:success] || flash[:error] %>
+<div id="toast-container" class="fixed top-4 right-4 z-50 space-y-2" data-turbo-cache="false">
+    <% if flash[:notice] || flash[:success] %>
+    <div class=" toast-notification bg-green-500 text-white px-6 py-4 rounded-lg shadow-lg flex items-center justify-between min-w-80 animate-slide-in">
+        <div class="flex items-center gap-3">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+            </svg>
+            <span class="font-semibold"><%= flash[:notice] || flash[:success] %></span>
+        </div>
+        <button onclick="this.parentElement.remove()" class="ml-4 text-white hover:text-gray-200">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+            </svg>
+        </button>
+    </div>
+    <% end %>
+
+    <% if flash[:alert] || flash[:error] %>
+    <div class="toast-notification bg-red-500 text-white px-6 py-4 rounded-lg shadow-lg flex items-center justify-between min-w-80 animate-slide-in">
+        <div class="flex items-center gap-3">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+            </svg>
+            <span class="font-semibold"><%= flash[:alert] || flash[:error] %></span>
+        </div>
+        <button onclick="this.parentElement.remove()" class="ml-4 text-white hover:text-gray-200">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+            </svg>
+        </button>
+    </div>
+    <% end %>
+</div>
+
+<script>
+    // Auto-dismiss after 5 seconds
+    setTimeout(() => {
+        const toasts = document.querySelectorAll('.toast-notification');
+        toasts.forEach(toast => {
+            toast.classList.remove('animate-slide-in');
+            toast.style.animation = 'slide-out 0.3s ease-out';
+            setTimeout(() => toast.remove(), 300);
+        });
+    }, 5000);
+</script>
+
+<style>
+    @keyframes slide-in {
+        from {
+            transform: translateX(100%);
+            opacity: 0;
+        }
+
+        to {
+            transform: translateX(0);
+            opacity: 1;
+        }
+    }
+
+    @keyframes slide-out {
+        from {
+            transform: translateX(0);
+            opacity: 1;
+        }
+
+        to {
+            transform: translateX(100%);
+            opacity: 0;
+            visibility: hidden;
+        }
+    }
+
+    .animate-slide-in {
+        animation: slide-in 0.3s ease-out;
+    }
+
+    .toast.slide-out {
+        animation: slide-out 0.3s ease-out forwards;
+    }
+</style>
+<% end %>
