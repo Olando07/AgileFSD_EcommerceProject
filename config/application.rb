@@ -15,7 +15,8 @@ module AgileFsdEcommerceProject
     # not contain `.rb` files, or that should not be reloaded or eager loaded.
     # Common ones are `templates`, `generators`, or `middleware`, for example.
     config.autoload_lib(ignore: %w[assets tasks])
-
+    config.assets.precompile += %w[ active_admin.js active_admin.css active_admin/print.css ]   
+    config.assets.enabled = true   
     # Configuration for the application, engines, and railties goes here.
     #
     # These settings can be overridden in specific environments using the files
