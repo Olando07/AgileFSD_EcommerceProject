@@ -1,2 +1,24 @@
-<h1>Sessions#new</h1>
-<p>Find me in app/views/sessions/new.html.erb</p>
+<div class="container max-w-120 min-w-100 place-self-center my-35">
+    <div class="container bg-gray-700 rounded-lg py-10 px-10 flex flex-col items-center">
+        <h1 class="text-4xl py-6">A&W User Login</h1>
+        <%= form_with url: login_path, method: :post, class: "text-lg" do |f| %>
+        <div class="login-divs">
+            <label for="username">Enter your username:</label>
+            <br>
+            <%= f.text_field :name, placeholder: "Username", class: "relative block w-full appearance-none rounded-lg px-2 text-md text-zinc-950 placeholder:text-zinc-500 sm:text-md dark:text-white border border-zinc-950/10 data-hover:border-zinc-950/20 dark:border-white/10 dark:data-hover:border-white/20 bg-transparent dark:bg-white/5 focus:outline-hidden data-invalid:border-red-500 data-invalid:data-hover:border-red-500 dark:data-invalid:border-red-600 dark:data-invalid:data-hover:border-red-600 data-disabled:border-zinc-950/20 dark:data-disabled:border-white/15 dark:data-disabled:bg-white/2.5 dark:data-hover:data-disabled:border-white/15 dark:scheme-dark" %>
+        </div>
+        <div class="login-divs">
+            <label for="password">Enter your password:</label>
+            <br>
+            <%= f.password_field :password, placeholder: "Password", class: "relative block w-full appearance-none rounded-lg px-2 text-md text-zinc-950 placeholder:text-zinc-500 sm:text-md dark:text-white border border-zinc-950/10 data-hover:border-zinc-950/20 dark:border-white/10 dark:data-hover:border-white/20 bg-transparent dark:bg-white/5 focus:outline-hidden data-invalid:border-red-500 data-invalid:data-hover:border-red-500 dark:data-invalid:border-red-600 dark:data-invalid:data-hover:border-red-600 data-disabled:border-zinc-950/20 dark:data-disabled:border-white/15 dark:data-disabled:bg-white/2.5 dark:data-hover:data-disabled:border-white/15 dark:scheme-dark" %>
+        </div>
+        <div class="text-sm flex justify-evenly mt-8 mb-5">
+            <a href="#">Forgot your password?</a>
+        </div>
+        <div class="flex justify-evenly mb-10">
+            <%= f.submit "Login", class: "cursor-pointer inline-flex items-center rounded-md bg-orange-500 px-4 py-1 text-md font-semibold text-white hover:bg-orange-400 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange-500"%>
+            <%= link_to "Sign Up", signup_path, class: "inline-flex items-center rounded-md bg-orange-500 px-4 py-1 text-md font-semibold text-white hover:bg-orange-400 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange-500"%>
+        </div>
+        <% end %>
+    </div>
+</div>

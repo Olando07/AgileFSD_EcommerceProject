@@ -62,8 +62,8 @@ group :test do
   gem "selenium-webdriver"
 end
 
-gem 'activeadmin'
 gem 'devise'
+gem 'activeadmin'
 gem 'sass-rails'
 gem 'bcrypt'
 gem 'faker'
