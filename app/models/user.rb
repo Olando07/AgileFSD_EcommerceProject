@@ -17,4 +17,12 @@ class User < ApplicationRecord
   def set_defaults
     self.is_admin ||= false
   end
+
+   def self.ransackable_associations(auth_object = nil)
+    ["orders", "province"]
+  end
+
+  def self.ransackable_attributes(auth_object = nil)
+    ["created_at", "email", "id", "id_value", "is_admin", "name", "password_digest", "province_id", "street_address", "telephone", "updated_at"]
+  end
 end
