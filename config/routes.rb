@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get "products/index"
+  get "products/show"
   get "users/new"
   get "users/create"
   get "sessions/new"
