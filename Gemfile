@@ -61,3 +61,12 @@ group :test do
   gem "capybara"
   gem "selenium-webdriver"
 end
+
+gem 'activeadmin'
+gem 'devise'
+gem 'sass-rails'
+gem 'bcrypt'
+gem 'faker'
+gem 'kaminari'
+gem 'sprockets-rails'
+gem 'image_processing'
