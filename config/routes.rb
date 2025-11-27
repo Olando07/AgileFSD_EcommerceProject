@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get "admin/index"
   get "orders/new"
   get "orders/create"
   get "orders/show"
