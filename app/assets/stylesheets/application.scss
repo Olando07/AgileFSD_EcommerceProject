@@ -137,6 +137,12 @@ $light-primary-color: #fb923c;
 // }
 
 // Login & SignUp pages
+.login-div-container {
+    background-color: #334155;
+    padding: 75px 55px;
+    border-radius: 10px;
+}
+
 .login-divs, .signup-divs {
     margin: 20px 0;
 }
@@ -151,4 +157,28 @@ $light-primary-color: #fb923c;
     .nav-container, .navbar {
         flex-direction: column;
     }
+}
+
+.container {
+  max-width: 120px;
+  min-width: 100px;
+  place-self: center;
+}
+
+@media (min-width: 640px) {
+  .container {
+    max-width: 640px;
+  }
+}
+
+@media (min-width: 768px) {
+  .container {
+    max-width: 768px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .container {
+    max-width: 1024px;
+  }
 }
