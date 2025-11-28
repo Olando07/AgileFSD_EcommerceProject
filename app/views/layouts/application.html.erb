@@ -20,8 +20,9 @@
     <%= javascript_importmap_tags %>
 </head>
 
-<body>
+<body class="body">
     <%= yield %>
+    <%= render "layouts/toast" %>
 </body>
 
 </html>

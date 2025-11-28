@@ -1,44 +1,41 @@
-<nav class="lg:flex items-center justify-center flex-col md:flex-row">
-    <ul class="flex justify-center items-center gap-8 my-12 text-lg flex-col md:flex-row">
+<nav class="nav-container">
+    <ul class="navbar">
         <li>
-            <%= link_to "Home", root_path, class:"cursor-pointer inline-flex items-center rounded-md bg-orange-500 px-4 py-1 text-md font-semibold text-white hover:bg-orange-400 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange-500"%>
+            <%= link_to "Home", root_path, class:"navlinks"%>
         </li>
-        <li><%= link_to "Menu", products_path, class: "cursor-pointer inline-flex items-center rounded-md bg-orange-500 px-4 py-1 text-md font-semibold text-white hover:bg-orange-400 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange-500"%>
-        </li>
-        <li>
-            <a href="#about" class="cursor-pointer inline-flex items-center rounded-md bg-orange-500 px-4 py-1 text-md font-semibold text-white hover:bg-orange-400 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange-500">About Us</a>
+        <li><%= link_to "Products", products_path, class: "navlinks"%>
         </li>
         <li>
-            <a href="#faq" class="cursor-pointer inline-flex items-center rounded-md bg-orange-500 px-4 py-1 text-md font-semibold text-white hover:bg-orange-400 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange-500">FAQ</a>
+            <a href="#about" class="navlinks">About Us</a>
+        </li>
+        <li>
+            <a href="#faq" class="navlinks">FAQ</a>
         </li>
         <% if logged_in? && current_user.is_admin? %>
         <li>
-            <%= link_to "Admin", admin_path, class:"cursor-pointer inline-flex items-center rounded-md bg-orange-500 px-4 py-1 text-md font-semibold text-white hover:bg-orange-400 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange-500"%>
+            <%= link_to "Admin Dashboard", admin_root_path, class:"navlinks"%>
         </li>
         <% end %>
     </ul>
-    <div class="flex gap-4 items-center justify-center lg:absolute lg:right-30">
+    <div class="auth-nav">
         <% if logged_in? %>
         <p>Welcome, <%= current_user.name %>!</p>
-        <%= button_to "Logout", logout_path, method: :delete, class: "cursor-pointer inline-flex items-center rounded-md bg-orange-500 px-4 py-1 text-md font-semibold text-white hover:bg-orange-400 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange-500" %>
+        <%= button_to "Logout", logout_path, method: :delete, class: "navlinks" %>
         <% else %>
-        <%= link_to "Login", login_path, class: "cursor-pointer inline-flex items-center rounded-md bg-orange-500 px-4 py-1 text-md font-semibold text-white hover:bg-orange-400 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange-500" %>
-        <% end %>
-        <% if current_user&.is_admin? %>
-        <%= "Admin Dashboard", admin_root_path, class: "" %>
+        <%= link_to "Login", login_path, class: "navlinks" %>
         <% end %>
     </div>
 </nav>
-<section id="hero" class="py-20">
-    <p>Welcome to A&W</p>
+<section id="hero" class="">
+    <h2 class="section-heading">Welcome to A&W</h2>
 </section>
-<section id="about" class="py-20 px-40">
-    <h2 class="text-3xl font-bold mb-6">About Us</h2>
-    <h2 class="text-2xl font-bold mb-3">Our Story is a good one</h2>
+<section id="about" class="">
+    <h2 class="section-heading aboutus-heading">About Us</h2>
+    <h2 class="section-heading aboutus-subheading">Our Story is a good one</h2>
     <p class="mb-2">Good food makes good food, but there's more to our story than that. From introducing recyclable and compostable packaging to fundraising to support Canadians living with Multiple Sclerosis, we strive to make a positive impact in our community.</p>
     <p>A&W is a proud canadian franchise that has been serving Canadians for 106 years.</p>
 </section>
-<section id="faq" class="py-20 px-40">
-    <h2 class="text-3xl font-bold mb-6">FAQ</h2>
+<section id="faq" class="">
+    <h2 class="section-heading">FAQ</h2>
     <!-- FAQ content -->
 </section>
