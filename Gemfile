@@ -62,11 +62,11 @@ group :test do
   gem "selenium-webdriver"
 end
 
-gem 'devise'
-gem 'activeadmin'
-gem 'sass-rails'
-gem 'bcrypt'
-gem 'faker'
-gem 'kaminari'
-gem 'sprockets-rails'
-gem 'image_processing'
+gem "devise"
+gem "activeadmin"
+gem "sass-rails"
+gem "bcrypt"
+gem "faker"
+gem "kaminari"
+gem "sprockets-rails"
+gem "image_processing"

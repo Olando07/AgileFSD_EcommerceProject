@@ -5,10 +5,10 @@ ActiveAdmin.setup do |config|
   # for each of the active admin pages.
   #
   config.authentication_method = nil
-  config.current_user_method = nil   
+  config.current_user_method = nil
 
   config.logout_link_path = :login_path
-  
+
   config.site_title = "Agile Fsd Ecommerce Project"
 
   # Set the link url for the title. For example, to take
@@ -176,7 +176,7 @@ ActiveAdmin.setup do |config|
   # You can exclude possibly sensitive model attributes from being displayed,
   # added to forms, or exported by default by ActiveAdmin
   #
-  config.filter_attributes = [:encrypted_password, :password, :password_confirmation]
+  config.filter_attributes = [ :encrypted_password, :password, :password_confirmation ]
 
   # == Localize Date/Time Format
   #

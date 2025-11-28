@@ -1,5 +1,14 @@
 {
   "dependencies": {
     "bulma": "^1.0.4"
+  },
+  "devDependencies": {
+    "eslint": "^9.39.1",
+    "prettier": "^3.7.1",
+    "stylelint": "^16.26.1"
+  },
+  "scripts": {
+    "format": "rubocop -a && prettier --write . && stylelint --fix",
+    "lint": "rubocop && eslint . && stylelint ."
   }
 }

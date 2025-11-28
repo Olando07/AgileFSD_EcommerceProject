@@ -5,7 +5,7 @@ class ApplicationController < ActionController::Base
 
   def authenticate_admin!
     redirect_to login_path unless current_user&.is_admin?
-  end   
+  end
 
   def logged_in?
     !!session[:user_id]
@@ -20,7 +20,7 @@ class ApplicationController < ActionController::Base
       redirect_to login_path, alert: "You must be logged in"
     end
   end
-  
+
   def require_admin
     unless logged_in? && current_user.is_admin?
       redirect_to root_path, alert: "Access denied. Admin only."
