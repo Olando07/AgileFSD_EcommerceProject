@@ -1,7 +1,7 @@
 <div class="container max-w-120 min-w-100 place-self-center my-35">
     <div class="container bg-gray-700 rounded-lg py-10 px-10 flex flex-col items-center">
         <h1 class="text-4xl py-6">A&W User Registration</h1>
-        <%= form_with model: @user, method: :post, class: "text-lg" do |f| %>
+        <%= form_with model: @user, local: true, method: :post, class: "text-lg" do |f| %>
         <div class="signup-divs">
             <label for="username">Enter a username:</label>
             <br>
