@@ -68,9 +68,15 @@ $light-primary-color: #fb923c;
     "Noto Color Emoji";
 }
 
+html {
+  height: 100%;
+  margin: 0;
+}
+
 .body {
   background-color: #111827;
-  height: 100%vh;
+  min-height: 100%;
+  margin: 0;
 }
 
 // all button styles
@@ -83,6 +89,8 @@ $light-primary-color: #fb923c;
   background-color: $primary-color;
   padding: 0.2rem 1rem;
   text-decoration: none;
+  margin-bottom: 0 !important;
+  color: #fff !important;
 }
 
 // Main body styles
@@ -92,6 +100,7 @@ $light-primary-color: #fb923c;
   display: flex;
   justify-content: center;
   align-items: center;
+  background: transparent;
 }
 
 .nav-container,
@@ -102,7 +111,7 @@ $light-primary-color: #fb923c;
 }
 
 .nav-container {
-  height: 5rem;
+  height: 4rem;
 }
 
 .navbar {
@@ -117,7 +126,7 @@ $light-primary-color: #fb923c;
   }
 
   &:hover {
-    background-color: $light-primary-color;
+    background-color: $light-primary-color !important;
   }
 
   &:focus-visible {
@@ -138,7 +147,8 @@ $light-primary-color: #fb923c;
 // Index styles
 #hero,
 #about,
-#faq {
+#faq,
+#all-products {
   padding: 2rem 10rem;
 }
 
@@ -161,9 +171,9 @@ $light-primary-color: #fb923c;
 // Login styles
 .login-div-container,
 .signup-div-container {
-  padding: 15px 5px;
+  padding: 115px 5px;
   border-radius: 10px;
-  margin: 90px 0;
+  // margin: 90px 0;
   .login-div-subcontainer,
   .signup-div-subcontainer {
     background-color: #374151;
@@ -188,7 +198,7 @@ $light-primary-color: #fb923c;
         padding: 0.1rem 0.5rem;
         margin-top: 0.4rem;
         font-size: 0.875rem;
-        color: #4b5563;
+        color: #000000;
         font-size: var(--text-md);
         border: 1px solid rgba(31, 41, 55, 0.1);
         outline: none;
@@ -204,7 +214,7 @@ $light-primary-color: #fb923c;
         }
       }
       .reset-password {
-        font-size: var(--text-sm);
+        font-size: var(--text-md);
         display: flex;
         justify-content: space-evenly;
         margin: 2rem 0 1.25rem;
@@ -218,10 +228,12 @@ $light-primary-color: #fb923c;
         .login-button,
         .signup-button {
           font-size: var(--text-lg);
-
+          font-weight: var(--font-semibold);
+          color: #fff;
+          height: 35px;
+          background-color: $primary-color;
           &:hover {
             background-color: $light-primary-color;
-            font-weight: var(--font-semibold);
           }
         }
       }
@@ -369,25 +381,53 @@ $light-primary-color: #fb923c;
   }
 }
 
-.container {
+.main-container {
   min-width: 290px;
   place-self: center;
+  // Products page
+  .menu-heading {
+    color: #fff;
+    margin-top: 4rem;
+    display: flex;
+    justify-content: center;
+  }
+
+  .menu-nav {
+    ul {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: row;
+      gap: 1.3rem;
+      font-size: var(--text-xl);
+      li a {
+        color: #ffffff;
+        &:hover {
+          color: #a75353;
+        }
+      }
+    }
+  }
+
+  .menu-searchbar {
+    margin-bottom: 1.25rem;
+  }
 }
 
 @media (min-width: 640px) {
-  .container {
+  .main-container {
     max-width: 640px;
   }
 }
 
 @media (min-width: 768px) {
-  .container {
+  .main-container {
     max-width: 768px;
   }
 }
 
 @media (min-width: 1024px) {
-  .container {
+  .main-container {
     max-width: 1024px;
   }
 }

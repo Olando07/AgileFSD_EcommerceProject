@@ -1,2 +1,3 @@
-<h1>Products#show</h1>
-<p>Find me in app/views/products/show.html.erb</p>
+<% if @product.image.attached? %>
+<%= image_tag @product.image, alt: @product.name, class: "product-image" %>
+<% end %>
