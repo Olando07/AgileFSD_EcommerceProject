@@ -43,8 +43,16 @@
         </div>
 
         <!-- Products -->
-        <div class="columns">
-
+        <div class="products-div columns is-multiline">
+            <% @products.each do |p| %>
+            <div class="column is-one-quarter">
+                <div class="card">
+                    <div class="card-image">
+                        <figure class="image is-4by3"></figure>
+                    </div>
+                </div>
+            </div>
+            <% end %>
         </div>
     </div>
 </section>
