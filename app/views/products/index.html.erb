@@ -1,6 +1,6 @@
 <section id="all-products">
     <%= render "layouts/navbar" %>
-    <div class="main-container">
+    <div class="main-container mainproducts-container">
         <h1 class="title is-2 menu-heading">Our Menu</h1>
 
         <!-- Catgorey filters -->
@@ -25,27 +25,26 @@
         </div>
 
         <!-- Search bar -->
-        <div>
+        <div class="searchbar-div">
             <%= form_with url: products_path, method: :get, class: "menu-searchbar" do |f| %>
             <div class="field has-addons">
                 <!-- make products the root to get feature mark -->
+                <div class="control is-expanded search-input">
+                    <%= f.text_field :search, class: "input", placeholder: "Search products...", value: params[:search] %>
+                </div>
+                <div class="control">
+                    <%= f.select :category, [['All Categories', ''], ['Burgers', 'Burgers'], ['Sides', 'Sides'], ['Drinks', 'Drinks'], ['Combos', 'Combos']], {}, class: "select" %>
+                </div>
+                <div class="control">
+                    <%= f.submit "Search", class: "button is-primary" %>
+                </div>
             </div>
             <% end %>
         </div>
 
         <!-- Products -->
-        <div>
-            <% @products.each do |product| %>
-            <div class="card">
-                <% if product.image.attached? %>
-                <%= image_tag product.image, alt: product.name %>
-                <% else %>
-                <div class="placeholder-image">No Image</div>
-                <% end %>
-                <h3><%= product.name %></h3>
-                <p>$<%= product.price %></p>
-            </div>
-            <% end %>
+        <div class="columns">
+
         </div>
     </div>
 </section>

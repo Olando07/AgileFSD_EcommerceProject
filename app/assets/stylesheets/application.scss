@@ -410,8 +410,43 @@ html {
   }
 
   .menu-searchbar {
-    margin-bottom: 1.25rem;
+    place-self: center;
+    margin: 1.7rem 0;
+    div {
+      display: flex;
+      align-items: center;
+      padding: 0 5px;
+      input, select {
+        font-size: var(--text-md) !important;
+        color: #000;
+      }
+      .input {
+        width: 260px;
+        border-radius: 10px !important;
+      }
+      .select {
+        font-size: var(--text-md) !important;
+        border-radius: 5px !important;
+        padding: 0 10px;
+        option {
+          color: #000;
+        }
+      }
+      .button {
+        border-radius: 15px !important;
+        font-size: var(--text-lg) !important;
+        padding: 2px 20px !important;
+        height: 34px;
+        &:hover {
+          background-color: #00a88f;
+        }
+      }
+    }
   }
+}
+
+.mainproducts-container {
+  width: 100%;
 }
 
 @media (min-width: 640px) {
