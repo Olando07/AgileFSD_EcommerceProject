@@ -1,17 +1,91 @@
 <%= render "layouts/navbar" %>
-<section id="hero" class="">
+<section id="hero">
     <h2 class="section-heading">Welcome to A&W</h2>
+    <h2 class="section-heading">Our Mission</h2>
+    <div>
+        <p>
+            A&W Canada's mission is to make A&W the #1 burger choice for Baby Boomers and the fastest-growing, most successful burger business in Canada.
+
+            Their vision focuses on quality, sustainability, and community:
+
+            Serve high-quality food like hormone- and antibiotic-free beef and natural root beer.
+            Lead in environmental responsibility with compostable packaging and waste reduction.
+            Support communities through initiatives like "Burgers to Beat MS," raising over $20 million for Canadians with Multiple Sclerosis.
+        </p>
+        <div class="full-menu-button">
+            <%= link_to "View Full Menu", products_path, class: "button is-warning" %>
+        </div>
+</section>
+<section class="section featured-products">
+    <div class="container">
+        <h2 class="title is-2 has-text-centered mb-6 ">Featured Items</h2>
+
+        <div class="columns is-multiline">
+            <% @featured_products.each do |product| %>
+            <div class="column is-one-quarter full-card">
+                <div class="card">
+                    <div class="card-image">
+                        <figure class="image is-4by3">
+                            <% if product.image.attached? %>
+                            <%= image_tag product.image, alt: product.name %>
+                            <% else %>
+                            <div class="no-image">
+                                <span class="has-text-grey">No Image</span>
+                            </div>
+                            <% end %>
+                        </figure>
+                    </div>
+                    <div class="card-content">
+                        <p class="title is-5"><%= product.name %></p>
+                        <p class="subtitle is-6">
+                            <span class="tag is-primary"><%= product.category %></span>
+                        </p>
+                        <p class="has-text-weight-bold has-text-primary">
+                            $<%= number_with_precision(product.price, precision: 2) %>
+                        </p>
+                    </div>
+                    <footer class="card-footer">
+                        <%= link_to "View Details", product_path(product), class: "card-footer-item" %>
+                    </footer>
+                </div>
+            </div>
+            <% end %>
+        </div>
+
+        <div class="has-text-centered mt-5 full-button-menu">
+            <%= link_to "View Full Menu →", products_path, class: "button is-primary" %>
+        </div>
+    </div>
 </section>
 <section>
-
-    <section id="about" class="">
-        <h2 class="section-heading aboutus-heading">About Us</h2>
+    <section id="about">
+        <h2 class=" section-heading aboutus-heading">About Us</h2>
         <h2 class="section-heading aboutus-subheading">Our Story is a good one</h2>
         <p>Good food makes good food, but there's more to our story than that. From introducing recyclable and compostable packaging to fundraising to support Canadians living with Multiple Sclerosis, we strive to make a positive impact in our community.</p>
-        <p>A&W is a proud canadian franchise that has been serving Canadians for 106 years.</p>
+        <p>A&W is a proud canadian franchise that has been serving Canadians for 106 years We are the first Canadian fast-food chain to use beef raised without hormones or steroids (since 2012) and the first restaurant chain in North America to commit to eliminating plastic straws. We hope that an option from our varying menu will entice you to become a regular customer and support us in our mission.</p>
     </section>
     <section id="faq" class="">
         <h2 class="section-heading">FAQ</h2>
         <!-- FAQ content -->
+        <div class="faq-div">
+            <p>Q: What makes A&W different from other fast-food chains?</p>
+            <p>A: A&W focuses on quality and sustainability from hormone and steroid free beef to compostable packaging and community-driven campaigns like Burgers to Beat MS.</p>
+        </div>
+        <div class="faq-div">
+            <p>Q: Does A&W use real ingredients?</p>
+            <p>A: Yes! Our tomatoes are grown in energy-efficient greenhouses, allowing them to ripen naturally on the vine. We also source fair-trade organic coffee and avoid artificial growth hormones in our beef.</p>
+        </div>
+        <div class="faq-div">
+            <p>Q: Why does A&W care so much about the environment?</p>
+            <p>A: We listen to our guests and franchisees who value sustainability. From reusable dine-in ware to eliminating plastic straws, we aim to lead the industry in reducing environmental impact.</p>
+        </div>
+        <div class="faq-div">
+            <p>Q: How does A&W support Canadian communities?</p>
+            <p>A: Through long-standing partnerships like Burgers to Beat MS, we raise funds and awareness for important causes, with franchisees actively involved in local initiatives.</p>
+        </div>
+        <div class="faq-div">
+            <p>Q: Is A&W packaging recyclable or compostable?</p>
+            <p>A: Almost all of our packaging is compostable. Dine-in customers enjoy meals on real ceramic plates with metal cutlery, further reducing waste.</p>
+        </div>
     </section>
 </section>

@@ -111,7 +111,7 @@ html {
 }
 
 .nav-container {
-  height: 4rem;
+  height: 6rem;
 }
 
 .navbar {
@@ -147,12 +147,49 @@ html {
 // Index styles
 #hero,
 #about,
-#faq {
+#faq, .featured-products {
   padding: 2rem 10rem;
+}
+
+#hero {
+  .full-menu-button {
+    display: flex;
+    justify-content: center;
+    margin: 1.4rem 0;
+    a {
+      font-size: var(--text-lg);
+      &:hover {
+        background-color: #978657;
+      }
+    }
+  }
 }
 
 #all-products {
   padding: 2rem 4rem;
+}
+
+.featured-products {
+  div {
+    h2 {
+      color: #fff;
+    }
+    .full-card{
+      margin: 0 3.1rem 2rem;
+      .no-image {
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: #565656;
+      }
+    }
+    .full-button-menu {
+      a {
+        font-size: var(--text-lg);
+      }
+    }
+  }
 }
 
 .section-heading,
@@ -457,11 +494,11 @@ html {
 .products-div {
   margin: 4rem 0;
   .no-image {
-    background-color: #adadad;
     height: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
+    background-color: #565656;
     span {
       display: flex;
       align-items: center;
@@ -471,6 +508,7 @@ html {
     }
   }
   .card-content {
+    background-color: #d0b8a5;
     .product-title,
     .category-tag {
       margin: 0.4rem 0 !important;
@@ -478,6 +516,53 @@ html {
     .category-tag span {
       font-size: 1.2rem !important;
     }
+  }
+}
+
+// pagination style
+.pagination {
+  display: flex;
+  justify-content: center;
+  gap: 0.25rem; 
+  margin-top: 3rem;  
+  margin-bottom: 3rem;  
+  
+  a, span {
+    padding: 0.4rem 1rem;  
+    font-size: 1.1rem;  
+    border-radius: 4px;
+    color: #fff;
+    text-decoration: none;
+    width: 100%;
+    height: 100%;
+    
+    &:hover {
+      background-color: #ff6600;
+      color: #363636;
+      border-color: #ff6600;
+    }
+  }
+
+  .first, .prev, .next, .last {
+    background-color: #ff6600;
+    display: flex;
+    flex-direction: row;
+    a {
+      padding: 0;
+      width: 60px;
+    }
+  }
+  
+  .current {
+    background-color: #ff6600;
+    color: white;
+    border-color: #ff6600;
+    font-weight: bold;
+  }
+  
+  .disabled {
+    opacity: 0.5;
+    pointer-events: none;
   }
 }
 

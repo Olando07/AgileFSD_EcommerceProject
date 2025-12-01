@@ -56,7 +56,7 @@
                                 <span>No Image</span>
                             </div>
                             <% end %>
-                        </figure>,
+                        </figure>
                         <diV class="card-content">
                             <p class="title is-5 product-title">
                                 <%= product.name %>
@@ -72,5 +72,9 @@
                 </div>
             </div>
             <% end %>
+        </div>
+
+        <div class="has-text-centered mt-5">
+            <%= paginate @products %>
         </div>
 </section>

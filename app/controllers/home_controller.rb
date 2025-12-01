@@ -1,5 +1,5 @@
 class HomeController < ApplicationController
   def index
-    @products = Product.limit(12)
+    @featured_products = Product.limit(8)  # Show 8 featured products
   end
 end

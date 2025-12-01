@@ -9,7 +9,7 @@ class ProductsController < ApplicationController
 
     # Filter by search
     if params[:search].present?
-      @products = @products.where("name LIKE ? OR decription LIKE ?", "%#{params[:search]}%", "%#{params[:search]}%")
+      @products = @products.where("LOWER(name) LIKE ? OR LOWER(description) LIKE ?", "%#{params[:search].downcase}%", "%#{params[:search].downcase}%")
     end
 
     @products = @products.page(params[:page]).per(12)
