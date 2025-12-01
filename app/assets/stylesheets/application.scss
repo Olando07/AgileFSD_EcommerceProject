@@ -147,7 +147,8 @@ html {
 // Index styles
 #hero,
 #about,
-#faq, .featured-products {
+#faq,
+.featured-products {
   padding: 2rem 10rem;
 }
 
@@ -174,7 +175,7 @@ html {
     h2 {
       color: #fff;
     }
-    .full-card{
+    .full-card {
       margin: 0 3.1rem 2rem;
       .no-image {
         height: 100%;
@@ -523,19 +524,20 @@ html {
 .pagination {
   display: flex;
   justify-content: center;
-  gap: 0.25rem; 
-  margin-top: 3rem;  
-  margin-bottom: 3rem;  
-  
-  a, span {
-    padding: 0.4rem 1rem;  
-    font-size: 1.1rem;  
+  gap: 0.25rem;
+  margin-top: 3rem;
+  margin-bottom: 3rem;
+
+  a,
+  span {
+    padding: 0.4rem 1rem;
+    font-size: 1.1rem;
     border-radius: 4px;
     color: #fff;
     text-decoration: none;
     width: 100%;
     height: 100%;
-    
+
     &:hover {
       background-color: #ff6600;
       color: #363636;
@@ -543,7 +545,10 @@ html {
     }
   }
 
-  .first, .prev, .next, .last {
+  .first,
+  .prev,
+  .next,
+  .last {
     background-color: #ff6600;
     display: flex;
     flex-direction: row;
@@ -552,14 +557,14 @@ html {
       width: 60px;
     }
   }
-  
+
   .current {
     background-color: #ff6600;
     color: white;
     border-color: #ff6600;
     font-weight: bold;
   }
-  
+
   .disabled {
     opacity: 0.5;
     pointer-events: none;
