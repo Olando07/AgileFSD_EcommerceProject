@@ -388,12 +388,11 @@ html {
   min-width: 290px;
   place-self: center;
 
-
   // Products page
   .menu-heading {
     color: #fff;
     margin: 4rem 0 1rem;
-    display: flex; 
+    display: flex;
     justify-content: center;
   }
 
@@ -421,7 +420,8 @@ html {
       display: flex;
       align-items: center;
       padding: 0 5px;
-      input, select {
+      input,
+      select {
         font-size: var(--text-md) !important;
         color: #000;
       }
@@ -458,23 +458,24 @@ html {
   margin: 4rem 0;
   .no-image {
     background-color: #adadad;
-    height: 100%; 
-    display: flex; 
-    align-items: center; 
+    height: 100%;
+    display: flex;
+    align-items: center;
     justify-content: center;
-    span{
-      display: flex; 
-      align-items: center; 
+    span {
+      display: flex;
+      align-items: center;
       font-size: var(--text-lg);
       color: #000;
       height: 35px;
     }
   }
   .card-content {
-    .product-title, .category-tag {
+    .product-title,
+    .category-tag {
       margin: 0.4rem 0 !important;
     }
-    .category-tag span{
+    .category-tag span {
       font-size: 1.2rem !important;
     }
   }

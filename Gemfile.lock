@@ -448,6 +448,7 @@ PLATFORMS
   aarch64-linux-musl
   arm-linux-gnu
   arm-linux-musl
+  x86_64-linux
   x86_64-linux-gnu
   x86_64-linux-musl
 
@@ -465,7 +466,7 @@ DEPENDENCIES
   jbuilder
   kamal
   kaminari
-  pg
+  pg (~> 1.1)
   puma (>= 5.0)
   rails (~> 8.1.1)
   rubocop-rails-omakase
