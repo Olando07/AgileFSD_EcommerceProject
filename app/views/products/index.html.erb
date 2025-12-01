@@ -44,15 +44,33 @@
 
         <!-- Products -->
         <div class="products-div columns is-multiline">
-            <% @products.each do |p| %>
-            <div class="column is-one-quarter">
-                <div class="card">
+            <% @products.each do |product| %>
+            <div class="column is-4 is-one-quarter">
+                <div class="card mx-5 mb-5">
                     <div class="card-image">
-                        <figure class="image is-4by3"></figure>
+                        <figure class="image is-4by3">
+                            <% if product.image.attached? %>
+                            <%= image_tag product.image alt: product.name %>
+                            <% else %>
+                            <div class="no-image">
+                                <span>No Image</span>
+                            </div>
+                            <% end %>
+                        </figure>,
+                        <diV class="card-content">
+                            <p class="title is-5 product-title">
+                                <%= product.name %>
+                            </p>
+                            <p class="subtitle is-6 has-text-grey category-tag">
+                                <span class="tag is-primary"><%= product.category %></span>
+                            </p>
+                            <p class="has-text-weight-bold has-text-primary">
+                                $<%= number_with_precision(product.price, precision: 2) %>
+                            </p>
+                        </div>
                     </div>
                 </div>
             </div>
             <% end %>
         </div>
-    </div>
 </section>
