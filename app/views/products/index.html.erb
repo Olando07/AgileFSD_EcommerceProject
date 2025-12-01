@@ -50,7 +50,7 @@
                     <div class="card-image">
                         <figure class="image is-4by3">
                             <% if product.image.attached? %>
-                            <%= image_tag product.image alt: product.name %>
+                            <%= image_tag product.image, alt: product.name %>
                             <% else %>
                             <div class="no-image">
                                 <span>No Image</span>
