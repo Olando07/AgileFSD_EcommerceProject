@@ -1,2 +1,76 @@
-<h1>Products#index</h1>
-<p>Find me in app/views/products/index.html.erb</p>
+<section id="all-products">
+    <%= render "layouts/navbar" %>
+    <div class="main-container mainproducts-container">
+        <h1 class="title is-2 menu-heading">Our Menu</h1>
+
+        <!-- Catgorey filters -->
+        <div class="menu-nav">
+            <ul>
+                <li class="<%= 'is-active' if params[:category].blank? %>">
+                    <%= link_to "All", products_path %>
+                </li>
+                <li class="<%= 'is-active' if params[:category] == 'Burgers' %>">
+                    <%= link_to "Burgers", products_path(category: "Burgers") %>
+                </li>
+                <li class="<%= 'is-active' if params[:category] == 'Drinks' %>">
+                    <%= link_to "Drinks", products_path(category: "Drinks") %>
+                </li>
+                <li class="<%= 'is-active' if params[:category] == 'Sides' %>">
+                    <%= link_to "Sides", products_path(category: "Sides") %>
+                </li>
+                <li class="<%= 'is-active' if params[:category] == 'Combos' %>">
+                    <%= link_to "Combos", products_path(category: "Combos") %>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Search bar -->
+        <div class="searchbar-div">
+            <%= form_with url: products_path, method: :get, class: "menu-searchbar" do |f| %>
+            <div class="field has-addons">
+                <!-- make products the root to get feature mark -->
+                <div class="control is-expanded search-input">
+                    <%= f.text_field :search, class: "input", placeholder: "Search products...", value: params[:search] %>
+                </div>
+                <div class="control">
+                    <%= f.select :category, [['All Categories', ''], ['Burgers', 'Burgers'], ['Sides', 'Sides'], ['Drinks', 'Drinks'], ['Combos', 'Combos']], {}, class: "select" %>
+                </div>
+                <div class="control">
+                    <%= f.submit "Search", class: "button is-primary" %>
+                </div>
+            </div>
+            <% end %>
+        </div>
+
+        <!-- Products -->
+        <div class="products-div columns is-multiline">
+            <% @products.each do |product| %>
+            <div class="column is-4 is-one-quarter">
+                <div class="card mx-5 mb-5">
+                    <div class="card-image">
+                        <figure class="image is-4by3">
+                            <% if product.image.attached? %>
+                            <%= image_tag product.image alt: product.name %>
+                            <% else %>
+                            <div class="no-image">
+                                <span>No Image</span>
+                            </div>
+                            <% end %>
+                        </figure>,
+                        <diV class="card-content">
+                            <p class="title is-5 product-title">
+                                <%= product.name %>
+                            </p>
+                            <p class="subtitle is-6 has-text-grey category-tag">
+                                <span class="tag is-primary"><%= product.category %></span>
+                            </p>
+                            <p class="has-text-weight-bold has-text-primary">
+                                $<%= number_with_precision(product.price, precision: 2) %>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <% end %>
+        </div>
+</section>

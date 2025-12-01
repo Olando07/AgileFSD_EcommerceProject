@@ -41,7 +41,7 @@ provinces_data.each { |data| Province.create!(data) }
 puts "Created #{Province.count} provinces"
 
 puts "Creating admin user..."
-User.find_or_create_by(email: "admin@aw.com") do |user| 
+User.find_or_create_by(email: "admin@aw.com") do |user|
   user.name = "Admin"
   user.password = "password123"
   user.password_confirmation = "password123"

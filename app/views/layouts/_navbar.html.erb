@@ -1,0 +1,25 @@
+<nav class="nav-container">
+    <ul class="navbar">
+        <li>
+            <%= link_to "Home", root_path, class:"navlinks buttons"%>
+        </li>
+        <li><%= link_to "Products", products_path, class: "navlinks buttons"%>
+        </li>
+        <li>
+            <%= link_to "About Us", root_path(anchor: "about") , class: "navlinks buttons" %>
+        </li>
+        <% if logged_in? && current_user.is_admin? %>
+        <li>
+            <%= link_to "Admin Dashboard", admin_root_path, class:"navlinks buttons"%>
+        </li>
+        <% end %>
+    </ul>
+    <div class="auth-nav">
+        <% if logged_in? %>
+        <p>Welcome, <%= current_user.name %>!</p>
+        <%= button_to "Logout", logout_path, method: :delete, class: "navlinks buttons" %>
+        <% else %>
+        <%= link_to "Login", login_path, class: "navlinks buttons" %>
+        <% end %>
+    </div>
+</nav>
