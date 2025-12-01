@@ -1,3 +1,40 @@
-<% if @product.image.attached? %>
-<%= image_tag @product.image, alt: @product.name, class: "product-image" %>
-<% end %>
+<div class="product-detail-container">
+    <div class="product-detail">
+        <div class="product-header">
+            <h1><%= @product.name %></h1>
+        </div>
+
+        <div class="product-content">
+            <div class="product-image">
+                <% if @product.image.attached? %>
+                <%= image_tag @product.image, alt: @product.name %>
+                <% else %>
+                <%= image_tag 'placeholder.jpg', alt: 'No image available' %>
+                <% end %>
+            </div>
+
+            <div class="product-info">
+                <div class="product-price">
+                    <h2>$<%= number_with_precision(@product.price, precision: 2) %></h2>
+                </div>
+
+                <div class="product-description">
+                    <h3>Description</h3>
+                    <p><%= @product.description %></p>
+                </div>
+
+                <% if @product.category %>
+                <div class="product-category">
+                    <strong>Category:</strong>
+                    <%= link_to @product.category, products_path(category: @product.category) %>
+                </div>
+                <% end %>
+
+                <div class="product-actions">
+                    <%= button_to "Add to Cart", "#", class: "btn btn-primary" %>
+                    <%= link_to "Back to Products", products_path, class: "btn btn-secondary" %>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

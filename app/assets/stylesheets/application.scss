@@ -588,3 +588,119 @@ html {
     max-width: 1024px;
   }
 }
+
+.product-detail-container {
+  max-width: 1200px;
+  place-self: center;
+  padding: 6rem 1rem;
+  
+  .product-detail {
+    background-color:#363636 ;
+    padding: 4rem 4rem;
+    border-radius: 1rem;
+
+  .product-header {
+    margin-bottom: 2rem;
+    
+    h1 {
+      font-size: 2rem;
+      color: #ffffff;
+    }
+  }
+
+  .product-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+
+    @media (max-width: 768px) {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .product-image {
+    img {
+      width: 100%;
+      height: auto;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+  }
+
+  .product-info {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+
+    .product-price {
+      h2 {
+        font-size: 2rem;
+        color: #cae2ff;
+        font-weight: bold;
+      }
+    }
+
+    .product-description {
+      h3 {
+        font-size: 1.25rem;
+        margin-bottom: 0.5rem;
+        color: #bcd4fd;
+      }
+
+      p {
+        line-height: 1.6;
+        color: #c6dbff;
+      }
+    }
+
+    .product-category {
+      padding: 1rem;
+      background-color: #f7fafc;
+      border-radius: 4px;
+
+      a {
+        color: #3182ce;
+        text-decoration: none;
+
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+    }
+
+    .product-actions {
+      display: flex;
+      gap: 1rem;
+      margin-top: 1rem;
+
+      .btn {
+        padding: 0.75rem 1.5rem;
+        border-radius: 4px;
+        text-decoration: none;
+        font-weight: 500;
+        cursor: pointer;
+        border: none;
+        transition: all 0.2s;
+
+        &.btn-primary {
+          background-color: #3182ce;
+          color: white;
+
+          &:hover {
+            background-color: #2c5282;
+          }
+        }
+
+        &.btn-secondary {
+          background-color: #e2e8f0;
+          color: #2d3748;
+
+          &:hover {
+            background-color: #cbd5e0;
+          }
+        }
+      }
+    }
+  }
+}
+}

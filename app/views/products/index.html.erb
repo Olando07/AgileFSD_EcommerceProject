@@ -33,7 +33,7 @@
                     <%= f.text_field :search, class: "input", placeholder: "Search products...", value: params[:search] %>
                 </div>
                 <div class="control">
-                    <%= f.select :category, [['All Categories', ''], ['Burgers', 'Burgers'], ['Sides', 'Sides'], ['Drinks', 'Drinks'], ['Combos', 'Combos']], {}, class: "select" %>
+                    <%= f.select :category, [['All Categories', ''], ['Burgers', 'Burgers'], ['Sides', 'Sides'], ['Drinks', 'Drinks'], ['Combos', 'Combos']], {selected: params[:category]}, class: "select" %>
                 </div>
                 <div class="control">
                     <%= f.submit "Search", class: "button is-primary" %>
@@ -67,6 +67,7 @@
                             <p class="has-text-weight-bold has-text-primary">
                                 $<%= number_with_precision(product.price, precision: 2) %>
                             </p>
+                            <%= link_to "View Details", product_path(product), class: "btn btn-primary" %>
                         </div>
                     </div>
                 </div>
