@@ -14,11 +14,11 @@ Rails.application.routes.draw do
   resources :orders, only: [ :create, :show, :index ]
 
   # Show Cart with add, update, delete and clear
-  resource :cart, only: [ :show ] do
-    post "add/:product_id", to: "carts#add"
-    patch "update/:product_id", to: "carts#update"
-    delete "remove/:product_id", to: "carts#remove"
-    delete "clear", to: "carts#clear"
+  resource :cart, only: [ :show ], controller: 'cart' do
+    post "add/:product_id", to: "cart#add", as: "add"
+    patch "update/:product_id", to: "cart#update", as: "update"
+    delete "remove/:product_id", to: "cart#remove", as: "remove"
+    delete "clear", to: "cart#clear", as: "clear"
   end
 
   # Signup and create user

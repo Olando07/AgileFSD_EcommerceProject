@@ -14,9 +14,10 @@
         </li>
         <% end %>
     </ul>
+    <%= render "layouts/cart" %>
     <div class="auth-nav">
         <% if logged_in? %>
-        <p>Welcome, <%= current_user.name %>!</p>
+        <p class="navlinks"><%= current_user.name %></p>
         <%= button_to "Logout", logout_path, method: :delete, class: "navlinks buttons" %>
         <% else %>
         <%= link_to "Login", login_path, class: "navlinks buttons" %>
