@@ -31,7 +31,15 @@
                 <% end %>
 
                 <div class="product-actions">
-                    <%= button_to "Add to Cart", "#", class: "btn btn-primary" %>
+                    <% if session[:cart]&.key?(@product.id.to_s) %>
+                    <%= button_to "Remove from Cart", remove_cart_path(@product.id), 
+                                method: :delete, 
+                                class: "button is-danger is-small" %>
+                    <% else %>
+                    <%= button_to "Add to Cart", add_cart_path(@product.id), 
+                                method: :post, 
+                                class: "button is-primary is-small" %>
+                    <% end %>
                     <%= link_to "Back to Products", products_path, class: "btn btn-secondary" %>
                 </div>
             </div>

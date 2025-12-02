@@ -1,0 +1,24 @@
+<%= turbo_stream.replace "cart-count" do %>
+  <span id="cart-count">
+    <% if session[:cart].present? && session[:cart].values.sum > 0 %>
+      <span class="tag is-primary is-rounded">
+        <%= session[:cart].values.sum %>
+      </span>
+    <% end %>
+  </span>
+<% end %>
+
+<%= turbo_stream.replace "product-button-#{params[:product_id]}" do %>
+  <div id="product-button-<%= params[:product_id] %>">
+    <%= button_to "Remove from Cart", remove_cart_path(params[:product_id]), 
+        method: :delete,
+        class: "button is-danger is-small" %>
+  </div>
+<% end %>
+
+<%= turbo_stream.prepend "toast-container" do %>
+  <div class="notification is-success is-light" style="margin-bottom: 10px;">
+    <button class="delete"></button>
+    <%= flash[:notice] %>
+  </div>
+<% end %>

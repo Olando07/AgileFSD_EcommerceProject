@@ -68,6 +68,19 @@
                                 $<%= number_with_precision(product.price, precision: 2) %>
                             </p>
                             <%= link_to "View Details", product_path(product), class: "btn btn-primary" %>
+                            <div class="product-button-<%= product.id %>">
+                                <% if session[:cart]&.key?(product.id.to_s) %>
+                                <%= button_to "Remove from Cart", remove_cart_path(product.id), 
+                                method: :delete, 
+                                class: "button is-danger is-small",
+                                form: { data: { turbo: true, turbo_stream: true } } %>
+                                <% else %>
+                                <%= button_to "Add to Cart", add_cart_path(product.id), 
+                                method: :post, 
+                                class: "button is-primary is-small",
+                                form: { data: { turbo: true, turbo_stream: true } } %>
+                                <% end %>
+                            </div>
                         </div>
                     </div>
                 </div>

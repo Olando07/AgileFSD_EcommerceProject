@@ -1,0 +1,93 @@
+<section id="cart-page">
+    <%= render "layouts/navbar" %>
+
+    <div class="main-container cart-container">
+        <h1 class="title cart-header">Shopping Cart</h1>
+
+        <% if @cart_items.empty? %>
+        <div class="notification is-info">
+            <p>Your cart is empty.</p>
+            <%= link_to "Continue Shopping", products_path, class: "button is-primary mt-3" %>
+        </div>
+        <% else %>
+        <div class="cart-items">
+            <% @cart_items.each do |item| %>
+            <div class="box mb-4 order-items">
+                <div class="columns is-vcentered product">
+                    <div class="column is-2">
+                        <figure class="image is-128x128">
+                            <% if item[:product].image.attached? %>
+                            <%= image_tag item[:product].image, alt: item[:product].name %>
+                            <% else %>
+                            <div class="no-image">No Image</div>
+                            <% end %>
+                        </figure>
+                    </div>
+
+                    <div class="column is-4 product-details">
+                        <h3 class="title is-5"><%= item[:product].name %></h3>
+                        <p class="subtitle is-6"><%= item[:product].category %></p>
+                        <p class="has-text-weight-bold has-text-primary">
+                            $<%= number_with_precision(item[:product].price, precision: 2) %>
+                        </p>
+                    </div>
+
+                    <div class="column is-3">
+                        <%= form_with url: update_cart_path(item[:product].id), method: :patch, local: true, class: "quantity-form" do |f| %>
+                        <div class="field has-addons">
+                            <div class="control">
+                                <%= f.number_field :quantity, value: item[:quantity], min: 1, class: "input" %>
+                            </div>
+                            <div class="control">
+                                <%= f.submit "Update", class: "button is-info" %>
+                            </div>
+                        </div>
+                        <% end %>
+                    </div>
+
+                    <div class="column is-3 has-text-right">
+                        <p class="has-text-weight-bold is-size-5" style="color: #000;">
+                            $<%= number_with_precision(item[:product].price * item[:quantity], precision: 2) %>
+                        </p>
+                        <%= button_to "Remove", remove_cart_path(item[:product].id), 
+                    method: :delete, 
+                    class: "button is-danger is-small mt-2",
+                    data: { confirm: "Remove this item from cart?" } %>
+                    </div>
+                </div>
+            </div>
+            <% end %>
+        </div>
+
+        <div class="box has-background-light subtotal-div">
+            <div class="columns">
+                <div class="column">
+                    <div class="level subtotal">
+                        <div class="level-left">
+                            <div class="level-item">
+                                <h3 class="title">Subtotal:</h3>
+                            </div>
+                        </div>
+                        <div class="level-right">
+                            <div class="level-item">
+                                <h3 class="title has-text-primary">
+                                    $<%= number_with_precision(@subtotal, precision: 2) %>
+                                </h3>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="buttons is-right cart-buttons">
+                        <%= button_to "Clear Cart", clear_cart_path, 
+                  method: :delete, 
+                  class: "button is-light",
+                  data: { confirm: "Are you sure you want to clear your cart?" } %>
+                        <%= link_to "Continue Shopping", products_path, class: "button is-info" %>
+                        <%= link_to "Proceed to Checkout", checkout_path, class: "button is-primary" %>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <% end %>
+    </div>
+</section>
