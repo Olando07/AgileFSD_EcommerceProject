@@ -6,7 +6,7 @@
 #
 one: {}
 # column: value
-email: $LABEL@example.com
+  email: $LABEL@example.com
 
 two: {}
 # column: value
