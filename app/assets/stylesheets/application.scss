@@ -489,7 +489,15 @@ html {
 }
 
 .mainproducts-container {
-  width: 100%;
+  width: 100%; 
+  .filter-nav {
+    .recent-products {
+      place-self: center;
+      a {
+        margin: 0 0.5rem ;
+      }
+    }
+  }
 }
 
 .products-div {
@@ -714,6 +722,10 @@ html {
       color: #fff;
       place-self: center;
       margin: 3rem 0;
+    }
+    .cart-food-image {
+      max-width: 90px;
+      max-height: 80px;
     }
     .order-items {
       width: 100%;
