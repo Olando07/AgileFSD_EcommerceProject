@@ -1,5 +1,10 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
+test_user:
+  name: John
+  password_digest: <%= User.new(password: 'password').send(:password_digest) %>
+  province: one
+
 one:
   name: MyString
   email: MyString

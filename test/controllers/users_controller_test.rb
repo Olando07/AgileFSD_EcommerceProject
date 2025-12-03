@@ -2,12 +2,23 @@ require "test_helper"
 
 class UsersControllerTest < ActionDispatch::IntegrationTest
   test "should get new" do
-    get users_new_path rescue get "/users/new"
+    get signup_path rescue get "/users/new"
     assert_response :success
   end
 
-  test "should get create" do
-    post users_create_path(), params: { user: { email: "test@example.com", password: "password", name: "Test" } } rescue post "/users", params: {}
+   test "should create user" do
+    assert_difference('User.count', 1) do
+      post users_path, params: { 
+        user: { 
+          name: "Test User",
+          email: "test@example.com", 
+          password: "password123",
+          password_confirmation: "password123",
+          street_address: "123 Test St",
+          province_id: provinces(:one).id 
+        }
+      }
+    end
     assert_response :redirect
   end
 end
