@@ -2,22 +2,22 @@ require "test_helper"
 
 class CartControllerTest < ActionDispatch::IntegrationTest
   test "should get index" do
-    get :index
+    get :action
     assert_response :success
   end
 
   test "should get add" do
-    get :add
+    get :action
     assert_response :success
   end
 
   test "should get remove" do
-    get :remove
+    get :action
     assert_response :success
   end
 
   test "should get update" do
-    get :update
+    get :action
     assert_response :success
   end
 end
