@@ -3,7 +3,20 @@
     <div class="main-container mainproducts-container">
         <h1 class="title is-2 menu-heading">Our Menu</h1>
 
-        <!-- Catgorey filters -->
+        <div class="filter-nav mb-4">
+            <div class="recent-products">
+                <%= link_to "All Products", products_path, 
+        class: "button #{params[:filter].blank? ? 'is-primary' : 'is-light'}" %>
+                <%= link_to "New Arrivals", products_path(filter: "new"), 
+        class: "button #{params[:filter] == 'new' ? 'is-primary' : 'is-light'}" %>
+                <%= link_to "Recently Updated", products_path(filter: "updated"), 
+        class: "button #{params[:filter] == 'updated' ? 'is-primary' : 'is-light'}" %>
+            </div>
+        </div>
+
+        <!-- Catgoery filters -->
+        <%
+=begin%>
         <div class="menu-nav">
             <ul>
                 <li class="<%= 'is-active' if params[:category].blank? %>">
@@ -23,6 +36,8 @@
                 </li>
             </ul>
         </div>
+        <%
+=end%>
 
         <!-- Search bar -->
         <div class="searchbar-div">
