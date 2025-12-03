@@ -1,2 +1,145 @@
-<h1>Orders#index</h1>
-<p>Find me in app/views/orders/index.html.erb</p>
+<section id="order-history">
+    <%= render "layouts/navbar" %>
+
+    <div class="main-container">
+        <h1 class="title is-2 mb-5">
+            <span class="icon-text">
+                <span class="icon"><i class="fas fa-history"></i></span>
+                <span class="order-history-title">Order History
+                </span>
+            </span>
+        </h1>
+
+        <% if @orders.empty? %>
+        <div class="notification is-info is-light">
+            <div class="content has-text-centered">
+                <p class="title is-4">No orders yet!</p>
+                <p>Start shopping to see your order history here.</p>
+                <%= link_to products_path, class: "button is-primary mt-3" do %>
+                <span class="icon"><i class="fas fa-shopping-bag"></i></span>
+                <span>Browse Products</span>
+                <% end %>
+            </div>
+        </div>
+        <% else %>
+        <% @orders.each do |order| %>
+        <div class="box mb-4">
+            <div class="columns is-vcentered">
+                <div class="column">
+
+                    <div class="level is-mobile mb-3">
+                        <div class="level-left">
+                            <div>
+                                <p class="title is-5 mb-1">Order #<%= order.id %></p>
+                                <p class="subtitle is-6 has-text-dark">
+                                    <%= order.created_at.strftime("%B %d, %Y at %I:%M %p") %>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="level-right">
+                            <div class="has-text-right">
+                                <p class="title is-4 has-text-primary mb-1">
+                                    $<%= number_with_precision(order.total, precision: 2) %>
+                                </p>
+                                <span class="tag is-<%= order.status == 'pending' ? 'warning' : order.status == 'shipped' ? 'info' : 'success' %> is-medium">
+                                    <%= order.status.titleize %>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="content">
+                        <p class="has-text-weight-bold mb-2">Items (<%= order.order_items.count %>):</p>
+                        <ul class="mb-3">
+                            <% order.order_items.limit(3).each do |item| %>
+                            <li>
+                                <%= item.quantity %>x <%= item.name_snapshot %>
+                                <span class="has-text-dark">- $<%= number_with_precision(item.line_total, precision: 2) %></span>
+                            </li>
+                            <% end %>
+                            <% if order.order_items.count > 3 %>
+                            <li class="has-text-dark">
+                                + <%= order.order_items.count - 3 %> more item(s)
+                            </li>
+                            <% end %>
+                        </ul>
+
+                        <details class="mb-2">
+                            <summary class="has-text-dark is-size-7" style="cursor: pointer;">
+                                <span class="icon is-small"><i class="fas fa-info-circle"></i></span>
+                                View tax breakdown
+                            </summary>
+
+                            <div class="box is-size-7 mt-2" style="background-color: #f5f5f5;">
+                                <p>Subtotal: $<%= number_with_precision(order.subtotal, precision: 2) %></p>
+                                <% if order.gst > 0 %>
+                                <p>GST (<%= (order.user.province.gst * 100).round(2) %>%): $<%= number_with_precision(order.gst, precision: 2) %></p>
+                                <% end %>
+                                <% if order.pst > 0 %>
+                                <p>PST (<%= (order.user.province.pst * 100).round(2) %>%): $<%= number_with_precision(order.pst, precision: 2) %></p>
+                                <% end %>
+                                <% if order.hst > 0 %>
+                                <p>HST (<%= (order.user.province.hst * 100).round(0) %>%): $<%= number_with_precision(order.hst, precision: 2) %></p>
+                                <% end %>
+                            </div>
+                        </details>
+                    </div>
+
+                    <%= link_to order_path(order), class: "button is-info" do %>
+                    <span class="icon"><i class="fas fa-eye"></i></span>
+                    <span>View Details</span>
+                    <% end %>
+
+                    <%= link_to products_path, class: "button is-light" do %>
+                    <span class="icon"><i class="fas fa-redo"></i></span>
+                    <span class="order-again">Order Again</span>
+                    <% end %>
+                </div>
+            </div>
+        </div>
+        <% end %>
+
+        <div class="has-text-centered mt-5">
+            <%= paginate @orders %>
+        </div>
+
+        <div class="box has-background-light mt-5">
+            <div class="level">
+                <div class="level-item has-text-centered">
+                    <div>
+                        <p class="heading">Total Orders</p>
+                        <p class="title"><%= @orders.total_count %></p>
+                    </div>
+                </div>
+                <div class="level-item has-text-centered">
+                    <div>
+                        <p class="heading">Total Spent</p>
+                        <p class="title has-text-primary">
+                            $<%= number_with_precision(current_user.orders.sum(:total), precision: 2) %>
+                        </p>
+                    </div>
+                </div>
+                <div class="level-item has-text-centered">
+                    <div>
+                        <p class="heading">Items Purchased</p>
+                        <p class="title">
+                            <%= current_user.orders.joins(:order_items).sum(:quantity) %>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <% end %>
+    </div>
+</section>
+
+<style>
+    details summary {
+        display: inline-flex;
+        align-items: center;
+    }
+
+    details summary::-webkit-details-marker {
+        display: none;
+    }
+</style>

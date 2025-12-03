@@ -1,2 +1,186 @@
-<h1>Orders#show</h1>
-<p>Find me in app/views/orders/show.html.erb</p>
+<section id="order-confirmation">
+    <%= render "layouts/navbar" %>
+
+    <div class="main-container">
+        <div class="notification is-success mb-5">
+            <h1 class="title is-3">
+                <span class="icon has-text-dark"><i class="fas fa-check-circle"></i></span>
+                Order Confirmed!
+            </h1>
+            <p class="subtitle is-5">Thank you for your order, <%= current_user.name %>!</p>
+            <p class="has-text-dark">
+                <strong>Order #<%= @order.id %></strong>
+                • Placed on <%= @order.created_at.strftime("%B %d, %Y at %I:%M %p") %>
+            </p>
+            <p class="mt-2">
+                <span class="tag is-<%= @order.status == 'pending' ? 'warning' : 'success' %> is-medium">
+                    Status: <%= @order.status.titleize %>
+                </span>
+            </p>
+        </div>
+
+        <div class="columns">
+            <div class="column is-7">
+                <div class="box">
+                    <h2 class="title is-4 mb-4">Order Items</h2>
+
+                    <table class="table is-fullwidth is-striped">
+                        <thead>
+                            <tr>
+                                <th>Item</th>
+                                <th>Price</th>
+                                <th class="has-text-centered">Qty</th>
+                                <th class="has-text-right">Total</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% @order_items.each do |item| %>
+                            <tr>
+                                <td>
+                                    <strong><%= item.name_snapshot %></strong>
+                                    <% if item.product %>
+                                    <br>
+                                    <%= link_to "View Product", product_path(item.product), class: "is-size-7" %>
+                                    <% end %>
+                                </td>
+                                <td class="has-text-dark">$<%= number_with_precision(item.price_snapshot, precision: 2) %></td>
+                                <td class="has-text-centered has-text-dark"><%= item.quantity %></td>
+                                <td class="has-text-right has-text-weight-bold has-text-dark">
+                                    $<%= number_with_precision(item.line_total, precision: 2) %>
+                                </td>
+                            </tr>
+                            <% end %>
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <th colspan="3" class="has-text-right">Subtotal:</th>
+                                <th class="has-text-right">$<%= number_with_precision(@order.subtotal, precision: 2) %></th>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+
+
+                <div class="buttons">
+                    <%= link_to orders_path, class: "button is-info" do %>
+                    <span class="icon"><i class="fas fa-history"></i></span>
+                    <span>View Order History</span>
+                    <% end %>
+
+                    <%= link_to products_path, class: "button is-primary" do %>
+                    <span class="icon"><i class="fas fa-shopping-bag"></i></span>
+                    <span>Continue Shopping</span>
+                    <% end %>
+                </div>
+            </div>
+
+
+            <div class="column is-5">
+                <div class="box mb-4">
+                    <h2 class="title is-5 mb-3">
+                        <span class="icon-text">
+                            <span class="icon"><i class="fas fa-truck has-text-dark"></i></span>
+                            <span class="has-text-dark">Delivery Address</span>
+                        </span>
+                    </h2>
+
+                    <div class="content">
+                        <p class="mb-1 has-text-dark"><strong><%= @order.user.name %></strong></p>
+                        <p class="mb-1 has-text-dark"><%= @order.user.street_address %></p>
+                        <% if @order.user.city.present? %>
+                        <p class="mb-1 has-text-dark"><%= @order.user.city %>, <%= @order.user.province.abbreviation %></p>
+                        <% else %>
+                        <p class="mb-1 has-text-dark"><%= @order.user.province.name %></p>
+                        <% end %>
+                        <% if @order.user.postal_code.present? %>
+                        <p><%= @order.user.postal_code %></p>
+                        <% end %>
+                    </div>
+                </div>
+
+
+                <div class="box">
+                    <h2 class="title is-5 mb-4">
+                        <span class="icon-text">
+                            <span class="icon"><i class="fas fa-file-invoice-dollar has-text-dark"></i></span>
+                            <span class="has-text-dark">Order Summary</span>
+                        </span>
+                    </h2>
+
+
+                    <div class="level is-mobile mb-2">
+                        <div class="level-left">
+                            <p class="has-text-dark">Subtotal:</p>
+                        </div>
+                        <div class="level-right">
+                            <p class="has-text-dark">$<%= number_with_precision(@order.subtotal, precision: 2) %></p>
+                        </div>
+                    </div>
+
+
+                    <% if @order.gst > 0 %>
+                    <div class="level is-mobile mb-2">
+                        <div class="level-left">
+                            <p class="has-text-dark">GST:</p>
+                        </div>
+                        <div class="level-right">
+                            <p class="has-text-dark">$<%= number_with_precision(@order.gst, precision: 2) %></p>
+                        </div>
+                    </div>
+                    <% end %>
+
+
+                    <% if @order.pst > 0 %>
+                    <div class="level is-mobile mb-2">
+                        <div class="level-left">
+                            <p class="has-text-dark">PST:</p>
+                        </div>
+                        <div class="level-right">
+                            <p class="has-text-dark">$<%= number_with_precision(@order.pst, precision: 2) %></p>
+                        </div>
+                    </div>
+                    <% end %>
+
+
+                    <% if @order.hst > 0 %>
+                    <div class="level is-mobile mb-2">
+                        <div class="level-left">
+                            <p class="has-text-dark">HST:</p>
+                        </div>
+                        <div class="level-right">
+                            <p class="has-text-dark">$<%= number_with_precision(@order.hst, precision: 2) %></p>
+                        </div>
+                    </div>
+                    <% end %>
+
+                    <hr>
+
+                    <div class="level is-mobile mb-3">
+                        <div class="level-left">
+                            <p class="title is-5">Total Paid:</p>
+                        </div>
+                        <div class="level-right">
+                            <p class="title is-4 has-text-primary class=" has-text-dark"">
+                                $<%= number_with_precision(@order.total, precision: 2) %>
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="notification is-light is-info is-size-7">
+                        <p class="has-text-dark"><strong>Note:</strong> Prices shown reflect the amount at time of order. Current product prices may differ.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+    .level.is-mobile {
+        margin-bottom: 0.5rem;
+    }
+
+    .level.is-mobile p {
+        margin-bottom: 0;
+    }
+</style>

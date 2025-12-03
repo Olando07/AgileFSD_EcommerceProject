@@ -87,7 +87,7 @@ html {
   border: none;
   border-radius: 0.5rem;
   background-color: $primary-color;
-  padding: 0.2rem 1rem;
+  padding: 0.4rem 1rem !important;
   text-decoration: none;
   margin-bottom: 0 !important;
   color: #fff !important;
@@ -724,8 +724,8 @@ html {
       margin: 3rem 0;
     }
     .cart-food-image {
-      max-width: 90px;
-      max-height: 80px;
+      max-width: 70px;
+      max-height: 70px;
     }
     .order-items {
       width: 100%;
@@ -757,6 +757,102 @@ html {
             justify-content: center;
             align-items: center;
             padding: 0.5rem 3rem;
+          }
+        }
+      }
+    }
+  }
+}
+
+#checkout-page {
+  .main-container {
+    margin: 3rem 0;
+    h1 {
+      color: #fff;
+      margin: 2rem 0;
+    }
+    div {
+      div {
+        .box {
+          table {
+            tbody {
+              tr {
+                td {
+                  color: #000;
+                }
+              }
+            }
+          }
+          .title {
+            span {
+              span {
+                color: #000;
+                i {
+                  color: #000;
+                }
+              }
+            }
+          }
+          .content {
+            p {
+              color: #000;
+            }
+          }
+          div {
+            p {
+              color: #000;
+            }
+          }
+        }
+      }
+    }
+  }
+  .level.is-mobile {
+        margin-bottom: 0.5rem;
+    }
+
+    .level.is-mobile p {
+        margin-bottom: 0;
+    }
+}
+
+#order-history {
+  .main-container {
+    h1 {
+      margin: 3rem 0 1rem;
+      .order-history-title {
+        margin-left: 0.7rem;
+      }
+    }
+    div {
+      div {
+        div {
+          .level {
+            gap: 15 px;
+            .level-left {
+              .title {
+                margin-top: 10px;
+              }
+              .subtitle {
+                margin-top: 10px;
+              }
+            }
+          }
+          .content {
+            p {
+              color: #000;
+            }
+            ul {
+              li {
+                color: #000;
+              }
+            }
+            details {
+              color: #000;
+            }
+          }
+          a span i, a {
+            color: #000;
           }
         }
       }

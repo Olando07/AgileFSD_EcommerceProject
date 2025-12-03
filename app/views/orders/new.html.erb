@@ -1,2 +1,155 @@
-<h1>Orders#new</h1>
-<p>Find me in app/views/orders/new.html.erb</p>
+<section id="checkout-page">
+    <%= render "layouts/navbar" %>
+
+    <div class="main-container">
+        <h1 class="title is-2 has-text-centered mb-5">Checkout</h1>
+
+        <div class="columns">
+            <div class="column is-7">
+                <div class="box">
+                    <h2 class="title is-4 mb-4">Order Summary</h2>
+
+                    <table class="table is-fullwidth is-hoverable">
+                        <thead>
+                            <tr>
+                                <th>Item</th>
+                                <th>Price</th>
+                                <th class="has-text-centered">Quantity</th>
+                                <th class="has-text-right">Total</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% @cart_items.each do |item| %>
+                            <tr>
+                                <td>
+                                    <strong><%= item[:product].name %></strong>
+                                    <br>
+                                    <span class="tag is-light is-small"><%= item[:product].category %></span>
+                                </td>
+                                <td>$<%= number_with_precision(item[:product].price, precision: 2) %></td>
+                                <td class="has-text-centered"><%= item[:quantity] %></td>
+                                <td class="has-text-right has-text-weight-bold">
+                                    $<%= number_with_precision(item[:line_total], precision: 2) %>
+                                </td>
+                            </tr>
+                            <% end %>
+                        </tbody>
+                    </table>
+
+                    <div class="level mt-4">
+                        <div class="level-left">
+                            <%= link_to "← Back to Cart", cart_path, class: "button is-light" %>
+                        </div>
+                        <div class="level-right">
+                            <%= link_to "Continue Shopping", products_path, class: "button is-light" %>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="column is-5">
+                <div class="box mb-4">
+                    <h2 class="title is-5 mb-3">
+                        <span class="icon-text">
+                            <span class="icon"><i class="fas fa-map-marker-alt"></i></span>
+                            <span>Delivery Address</span>
+                        </span>
+                    </h2>
+
+                    <div class="content">
+                        <p class="mb-1"><strong><%= current_user.name %></strong></p>
+                        <p class="mb-1"><%= current_user.street_address %></p>
+                        <% if current_user.city.present? %>
+                        <p class="mb-1"><%= current_user.city %>, <%= current_user.province.abbreviation %></p>
+                        <% else %>
+                        <p class="mb-1"><%= current_user.province.name %></p>
+                        <% end %>
+                        <% if current_user.postal_code.present? %>
+                        <p class="mb-1"><%= current_user.postal_code %></p>
+                        <% end %>
+                    </div>
+
+                </div>
+
+                <div class="box">
+                    <h2 class="title is-5 mb-4">
+                        <span class="icon-text">
+                            <span class="icon"><i class="fas fa-receipt"></i></span>
+                            <span>Order Total</span>
+                        </span>
+                    </h2>
+
+                    <div class="level is-mobile mb-2">
+                        <div class="level-left">
+                            <p>Subtotal:</p>
+                        </div>
+                        <div class="level-right">
+                            <p>$<%= number_with_precision(@subtotal, precision: 2) %></p>
+                        </div>
+                    </div>
+
+                    <% if @gst > 0 %>
+                    <div class="level is-mobile mb-2">
+                        <div class="level-left">
+                            <p>GST (<%= number_to_percentage(@province.gst * 100, precision: 2) %>):</p>
+                        </div>
+                        <div class="level-right">
+                            <p>$<%= number_with_precision(@gst, precision: 2) %></p>
+                        </div>
+                    </div>
+                    <% end %>
+
+                    <% if @pst > 0 %>
+                    <div class="level is-mobile mb-2">
+                        <div class="level-left">
+                            <p>PST (<%= number_to_percentage(@province.pst * 100, precision: 2) %>):</p>
+                        </div>
+                        <div class="level-right">
+                            <p>$<%= number_with_precision(@pst, precision: 2) %></p>
+                        </div>
+                    </div>
+                    <% end %>
+
+                    <% if @hst > 0 %>
+                    <div class="level is-mobile mb-2">
+                        <div class="level-left">
+                            <p>HST (<%= number_to_percentage(@province.hst * 100, precision: 2) %>):</p>
+                        </div>
+                        <div class="level-right">
+                            <p>$<%= number_with_precision(@hst, precision: 2) %></p>
+                        </div>
+                    </div>
+                    <% end %>
+
+                    <hr>
+
+                    <div class="level is-mobile mb-4">
+                        <div class="level-left">
+                            <p class="title is-5">Total:</p>
+                        </div>
+                        <div class="level-right">
+                            <p class="title is-4 has-text-primary">
+                                $<%= number_with_precision(@total, precision: 2) %>
+                            </p>
+                        </div>
+                    </div>
+
+                    <%= form_with url: orders_path, method: :post, local: true do |f| %>
+                    <%= f.submit "Place Order", 
+                class: "button is-primary is-fullwidth is-large", 
+                data: { confirm: "Confirm your order of $#{number_with_precision(@total, precision: 2)}?" } %>
+                    <% end %>
+
+                    <p class="has-text-centered has-text-dark mt-3 is-size-7">
+                        <span class="icon"><i class="fas fa-lock"></i></span>
+                        Secure checkout
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+
+</style>
