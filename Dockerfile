@@ -1,11 +1,9 @@
 # syntax=docker/dockerfile:1
 # check=error=true
 
-# This Dockerfile is designed for production, not development. Use with Kamal or build'n'run by hand:
+# This Dockerfile is designed for production, not development. 
+# Use with Kamal or build'n'run by hand:
 # docker build -t agile_fsd_ecommerce_project .
-# docker run -d -p 80:80 -e RAILS_MASTER_KEY=<value from config/master.key> --name agile_fsd_ecommerce_project agile_fsd_ecommerce_project
-
-# For a containerized dev environment, see Dev Containers: https://guides.rubyonrails.org/getting_started_with_devcontainer.html
 
 # Make sure RUBY_VERSION matches the Ruby version in .ruby-version
 ARG RUBY_VERSION=3.4.5
@@ -15,6 +13,7 @@ FROM docker.io/library/ruby:$RUBY_VERSION-slim AS base
 WORKDIR /rails
 
 # Install base packages
+# These are the runtime dependencies for the final image.
 RUN apt-get update -qq && \
     apt-get install --no-install-recommends -y curl libjemalloc2 libvips sqlite3 && \
     rm -rf /var/lib/apt/lists /var/cache/apt/archives
@@ -28,28 +27,24 @@ ENV RAILS_ENV="production" \
 # Throw-away build stage to reduce size of final image
 FROM base AS build
 
-# Install packages needed to build gems
+# Install packages needed to build gems AND Node.js
 RUN apt-get update -qq && \
-    apt-get install --no-install-recommends -y build-essential git libpq-dev libyaml-dev pkg-config && \
+    apt-get install --no-install-recommends -y \
+        build-essential git libpq-dev libyaml-dev pkg-config ca-certificates curl gnupg \
+        dirmngr && \
     rm -rf /var/lib/apt/lists /var/cache/apt/archives
 
+# Install Node.js and npm (Node 20)
+# NOTE: Using a separate RUN step for clarity and better caching
+RUN NODE_MAJOR=20 && \
+    curl -fsSL https://deb.nodesource.com/setup_$NODE_MAJOR.x | bash - && \
+    apt-get update -qq && \
+    apt-get install -y nodejs && \
+    apt-get remove -y dirmngr && \
+    rm -rf /var/lib/apt/lists/*
+    
 # Install application gems
 COPY Gemfile Gemfile.lock ./
-RUN bundle install && \
-    rm -rf ~/.bundle/ "${BUNDLE_PATH}"/ruby/*/cache "${BUNDLE_PATH}"/ruby/*/bundler/gems/*/.git && \
-    bundle exec bootsnap precompile --gemfile
-
-# Copy application code
-COPY . .
-
-# Precompile bootsnap code for faster boot times
-RUN bundle exec bootsnap precompile app/ lib/
-
-# Precompiling assets for production without requiring secret RAILS_MASTER_KEY
-RUN SECRET_KEY_BASE_DUMMY=1 ./bin/rails assets:precompile
-
-
-
 
 # Final stage for app image
 FROM base
@@ -61,10 +56,14 @@ COPY --from=build /rails /rails
 # Run and own only the runtime files as a non-root user for security
 RUN groupadd --system --gid 1000 rails && \
     useradd rails --uid 1000 --gid 1000 --create-home --shell /bin/bash && \
-    chown -R rails:rails db log storage tmp
+    mkdir -p db tmp log storage && \
+    chown -R rails:rails db log storage tmp   
 USER 1000:1000
 
 # Entrypoint prepares the database.
+COPY bin/docker-entrypoint /rails/bin/docker-entrypoint  
+COPY bin /rails/bin   
+COPY config /rails/config   
 ENTRYPOINT ["/rails/bin/docker-entrypoint"]
 
 # Start server via Thruster by default, this can be overwritten at runtime

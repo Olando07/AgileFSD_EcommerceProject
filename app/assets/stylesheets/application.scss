@@ -808,12 +808,12 @@ html {
     }
   }
   .level.is-mobile {
-        margin-bottom: 0.5rem;
-    }
+    margin-bottom: 0.5rem;
+  }
 
-    .level.is-mobile p {
-        margin-bottom: 0;
-    }
+  .level.is-mobile p {
+    margin-bottom: 0;
+  }
 }
 
 #order-history {
@@ -851,7 +851,8 @@ html {
               color: #000;
             }
           }
-          a span i, a {
+          a span i,
+          a {
             color: #000;
           }
         }
