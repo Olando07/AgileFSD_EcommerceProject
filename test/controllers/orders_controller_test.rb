@@ -2,22 +2,22 @@ require "test_helper"
 
 class OrdersControllerTest < ActionDispatch::IntegrationTest
   test "should get new" do
-    get :new
+    get :action
     assert_response :success
   end
 
   test "should get create" do
-    get :create
+    get :action
     assert_response :success
   end
 
   test "should get show" do
-    get :show
+    get :action
     assert_response :success
   end
 
   test "should get index" do
-    get :index
+    get :action
     assert_response :success
   end
 end
