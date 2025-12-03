@@ -2,7 +2,7 @@
 
 test_user:
   name: John
-  password_digest: <%= User.new(password: 'password').send(:password_digest) %>
+  password_digest: "<%= User.new(password: 'password').send(:password_digest) %>"
   province: one
 
 one:
