@@ -7,6 +7,11 @@ class OrderItem < ApplicationRecord
   validates :quantity, presence: true, numericality: { greater_than: 0 }
   validates :price_snapshot, presence: true, numericality: { greater_than: 0 }
 
+  # Helper method to get line item total
+  def line_total
+    price_snapshot * quantity
+  end
+
   def self.ransackable_associations(auth_object = nil)
     [ "order", "product" ]
   end

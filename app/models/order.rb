@@ -7,6 +7,11 @@ class Order < ApplicationRecord
   validates :total, presence: true, numericality: { greater_than_or_equal_to: 0 }
   validates :status, presence: true
 
+  # Helper method to get total items count
+  def total_items
+    order_items.sum(:quantity)
+  end
+
   def self.ransackable_associations(auth_object = nil)
     [ "order_items", "products", "user" ]
   end
