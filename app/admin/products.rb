@@ -14,7 +14,8 @@ ActiveAdmin.register Product do
   #   permitted
   # end
 
-  permit_params :name, :description, :price, :category, :image
+  permit_params :name, :description, :price, :category, :image, :on_sale
+  filter :on_sale, as: :boolean
 
   index do
       selectable_column
@@ -40,6 +41,7 @@ ActiveAdmin.register Product do
         f.input :description
         f.input :price
         f.input :category, as: :select, collection: [ "Burgers", "Sides", "Drinks", "Combos" ]
+        f.input :on_sale, as: :select, collection: [["Yes", true], ["No", false]], label: "On Sale?"
         f.input :image, as: :file, hint: f.object.image.attached? ? image_tag(url_for(f.object.image), size: "100x100") : content_tag(:span, "No image uploaded")
       end
       f.actions

@@ -1,17 +1,18 @@
 # Dockerfile
 FROM ruby:3.2.2
 
-# Install dependencies
-RUN apt-get update -qq && apt-get install -y \
-    nodejs \
-    npm \
-    postgresql-client \
-    build-essential \
-    libpq-dev \
-    curl
+# Install Node 20
+RUN curl -fsSL https://deb.nodesource.com/setup_20.x | bash - && \
+    apt-get install -y nodejs
 
 # Install Yarn
 RUN npm install -g yarn
+
+# Install other dependencies
+RUN apt-get update -qq && apt-get install -y \
+    postgresql-client \
+    build-essential \
+    libpq-dev
 
 # Set working directory
 WORKDIR /app
