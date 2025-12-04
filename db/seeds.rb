@@ -27,7 +27,7 @@ provinces_data = [
   { name: "Manitoba", abbreviation: "MB", gst: 0.05, pst: 0.07, hst: 0 },
   { name: "New Brunswick", abbreviation: "NB", gst: 0, pst: 0, hst: 0.15 },
   { name: "Newfoundland and Labrador", abbreviation: "NL", gst: 0, pst: 0, hst: 0.15 },
-  { name: "Northwest Territories",abbreviation: "NT", gst: 0.05, pst: 0, hst: 0 },
+  { name: "Northwest Territories", abbreviation: "NT", gst: 0.05, pst: 0, hst: 0 },
   { name: "Nova Scotia", abbreviation: "NS", gst: 0, pst: 0, hst: 0.15 },
   { name: "Nunavut", abbreviation: "NU", gst: 0.05, pst: 0, hst: 0 },
   { name: "Ontario", abbreviation: "ON", gst: 0, pst: 0, hst: 0.13 },
