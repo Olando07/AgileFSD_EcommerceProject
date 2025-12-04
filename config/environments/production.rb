@@ -79,7 +79,7 @@ Rails.application.configure do
   # Only use :id for inspections in production.
   config.active_record.attributes_for_inspect = [ :id ]
 
-  config.secret_key_base = ENV["5985a1887138f5af23ba60355461958a74369a27b5e932ab4acd652a90afa60e5a01742f53791716e5660a1bd44ba1bdaa51a4e75bd3bdae18bf855a513a95ba"]
+  config.secret_key_base = ENV["13ec214bccb8a17e78ac840d7523dfc5aea8f0434fa6647c1d08f648ef70c437d5e4368672c346c6694f974f8da525b7769493e0aa19f953d69f7a8621863ceb"]
   config.public_file_server.enabled = true
 
   # Enable DNS rebinding protection and other `Host` header attacks.
