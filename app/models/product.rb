@@ -2,6 +2,7 @@ class Product < ApplicationRecord
   has_many :order_items
   has_many :orders, through: :order_items
   has_one_attached :image
+  scope :on_sale, -> { where(on_sale: true) }
 
   validates :name, presence: true
   validates :description, presence: true

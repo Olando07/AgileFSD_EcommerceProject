@@ -1,6 +1,6 @@
 class Order < ApplicationRecord
   belongs_to :user
-  has_many :order_items
+  has_many :order_items, dependent: :destroy
   has_many :products, through: :order_items
 
   validates :user_id, presence: true
@@ -17,6 +17,6 @@ class Order < ApplicationRecord
   end
 
   def self.ransackable_attributes(auth_object = nil)
-    [ "created_at", "id", "status", "total", "updated_at", "user_id" ]
+    [ "created_at", "id", "status", "total", "updated_at", "user_id", "name_snapshot", "subtotal", "gst", "pst", "hst" ]
   end
 end

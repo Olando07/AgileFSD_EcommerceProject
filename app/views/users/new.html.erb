@@ -28,6 +28,16 @@
             <%= f.text_field :street_address, placeholder:"Street Address" %>
         </div>
         <div class="signup-divs">
+            <label for="city">Enter your city:</label>
+            <br>
+            <%= f.text_field :city, placeholder:"City" %>
+        </div>
+        <div class="signup-divs">
+            <label for="postal_code">Enter your postal code:</label>
+            <br>
+            <%= f.text_field :postal_code, placeholder:"Postal Code" %>
+        </div>
+        <div class="signup-divs">
             <label for="province">Enter your province:</label>
             <br>
             <%= f.select :province_id, 

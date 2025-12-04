@@ -80,7 +80,7 @@ Rails.application.configure do
   config.active_record.attributes_for_inspect = [ :id ]
 
   config.secret_key_base = ENV["5985a1887138f5af23ba60355461958a74369a27b5e932ab4acd652a90afa60e5a01742f53791716e5660a1bd44ba1bdaa51a4e75bd3bdae18bf855a513a95ba"]
-
+  config.public_file_server.enabled = true
 
   # Enable DNS rebinding protection and other `Host` header attacks.
   # config.hosts = [

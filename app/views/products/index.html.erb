@@ -11,6 +11,8 @@
         class: "button #{params[:filter] == 'new' ? 'is-primary' : 'is-light'}" %>
                 <%= link_to "Recently Updated", products_path(filter: "updated"), 
         class: "button #{params[:filter] == 'updated' ? 'is-primary' : 'is-light'}" %>
+                <%= link_to "On Sale", products_path(filter: "on_sale"),
+                class: "button #{params[:filter] == 'on_sale' ? 'is-primary' : 'is-light'}" %>
             </div>
         </div>
 

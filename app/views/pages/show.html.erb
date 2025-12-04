@@ -1,0 +1,15 @@
+<%= render "layouts/navbar" %>
+
+<section id="page-content">
+    <div class=" main-container" style="padding: 3rem 1rem 5rem;">
+        <div class="content" style="place-self: center;">
+            <h1 class="title is-2 has-text-white"><%= @page.title %></h1>
+
+            <div class="box" style="background: none;">
+                <%= simple_format @page.content, class: "is-size-6 has-text-white" %>
+            </div>
+
+            <%= link_to "Back to Home", root_path, class: "button is-primary" %>
+        </div>
+    </div>
+</section>

@@ -4,8 +4,8 @@ class OrderItem < ApplicationRecord
 
   validates :order_id, presence: true
   validates :product_id, presence: true
-  validates :quantity, presence: true, numericality: { greater_than: 0 }
-  validates :price_snapshot, presence: true, numericality: { greater_than: 0 }
+  validates :quantity, presence: true, numericality: { greater_than_or_equal_to: 0 }
+  validates :price_snapshot, presence: true, numericality: { greater_than_equal_to: 0 }
 
   # Helper method to get line item total
   def line_total
@@ -17,6 +17,6 @@ class OrderItem < ApplicationRecord
   end
 
   def self.ransackable_attributes(auth_object = nil)
-    [ "created_at", "id", "order_id", "price_snapshot", "product_id", "quantity", "updated_at" ]
+    [ "created_at", "id", "order_id", "price_snapshot", "product_id", "quantity", "updated_at", "name_snapshot", "subtotal" ]
   end
 end

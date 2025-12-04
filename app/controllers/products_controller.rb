@@ -17,6 +17,10 @@ class ProductsController < ApplicationController
       @products = @products.where("updated_at >= ? AND created_at < ?", 1.days.ago, 1.days.ago)
     end
 
+    if params[:filter] == "on_sale"
+      @products = @products.where(on_sale: true)
+    end
+
     # Filter by search
     if params[:search].present?
       @products = @products.where("LOWER(name) LIKE ? OR LOWER(description) LIKE ?", "%#{params[:search].downcase}%", "%#{params[:search].downcase}%")

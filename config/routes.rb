@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   get "up" => "rails/health#show", as: :rails_health_check
 
   root "home#index"
+  get "/pages/:slug", to: "pages#show", as: "page"
 
   # Create new Order, show order, show order, show index with order history
   get "/checkout", to: "orders#new"

@@ -178,3 +178,59 @@ puts "Burgers: #{Product.where(category: 'Burgers').count}"
 puts "Sides: #{Product.where(category: 'Sides').count}"
 puts "Drinks: #{Product.where(category: 'Drinks').count}"
 puts "Combos: #{Product.where(category: 'Combos').count}"
+
+Page.find_or_create_by(slug: 'about') do |page|
+  page.title = 'About Us'
+  page.content = <<~CONTENT
+    Welcome to A&W Canada! We've been serving Canadians for over 106 years.
+
+    Our Mission:
+    A&W Canada's mission is to make A&W the #1 burger choice and the fastest-growing, most successful burger business in Canada.
+
+    Our Story:
+    A&W is a proud Canadian franchise committed to quality and sustainability. We were the first Canadian fast-food chain to use beef raised without hormones or steroids (since 2012) and the first restaurant chain in North America to commit to eliminating plastic straws.
+
+    What Makes Us Different:
+    - Hormone and antibiotic-free beef
+    - Natural root beer made fresh daily
+    - Compostable and recyclable packaging
+    - Support for Canadians with Multiple Sclerosis through "Burgers to Beat MS" (over $20 million raised)
+    - Locally sourced ingredients including tomatoes grown in energy-efficient greenhouses
+    - Fair-trade organic coffee
+
+    Our Commitment:
+    From introducing recyclable and compostable packaging to fundraising to support Canadians living with Multiple Sclerosis, we strive to make a positive impact in our community. We hope that an option from our varying menu will entice you to become a regular customer and support us in our mission.
+  CONTENT
+end
+
+Page.find_or_create_by(slug: 'contact') do |page|
+  page.title = 'Contact Us'
+  page.content = <<~CONTENT
+    Get in Touch
+
+    We'd love to hear from you! Whether you have questions, feedback, or just want to say hello, feel free to reach out.
+
+    Contact Information:
+    Email: contact@aw-canada.com
+    Phone: (555) 123-4567
+
+    Address:
+    A&W Canada
+    123 Main Street
+    Winnipeg, MB R3C 1A5
+
+    Hours of Operation:
+    Monday - Thursday: 10:00 AM - 10:00 PM
+    Friday - Saturday: 10:00 AM - 11:00 PM
+    Sunday: 11:00 AM - 9:00 PM
+
+    Follow Us:
+    Facebook: @AWCanada
+    Instagram: @awcanada
+    Twitter: @AWCanada
+
+    For franchise inquiries, please email: franchise@aw-canada.com
+  CONTENT
+end
+
+puts "Pages created successfully!"
